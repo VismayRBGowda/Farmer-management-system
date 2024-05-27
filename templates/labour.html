@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Register Labour Details
+{% endblock title %}
+
+{% block body %}
+    <h3 class="text-center"><span>Register Labour Details</span></h3>
+
+    {% with messages=get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+
+                <form action="/labour" method="post">
+                    <div class="form-group">
+                        <label for="fname">First Name</label>
+                        <input type="text" class="form-control" name="fname" id="fname" required>
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="lname">Last Name</label>
+                        <input type="text" class="form-control" name="lname" id="lname" required>
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select class="form-control" id="gender" name="gender" required>
+                            <option selected>Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="phone_no">Phone Number</label>
+                        <input type="number" class="form-control" name="phone_no" id="phone_no" required>
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" class="form-control" name="state" id="state" required>
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="district">District</label>
+                        <input type="text" class="form-control" name="district" id="district" required>
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="town_village">Town/Village</label>
+                        <input type="text" class="form-control" name="town_village" id="town_village" required>
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="pincode">Pincode</label>
+                        <input type="number" class="form-control" name="pincode" id="pincode" required>
+                    </div>
+                    <br>
+
+                    <button type="submit" class="btn btn-success btn-block">Save Records</button>
+                </form>
+                <br>
+                <br>
+
+            </div>
+
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+    
+  <br>
+    
+<div class="container mt-3">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Labour ID</th>
+          <th scope="col">Fname</th>
+          <th scope="col">Lname</th>
+          <th scope="col">Phone number</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for post in query %}
+        <tr>
+          <th scope="row">{{post.labour_id}}</th>
+          <td>{{post.fname}}</td>
+          <td>{{post.lname}}</td>
+          <td>{{post.phone_no}}</td>
+        </tr>
+    {% endfor %}
+      </tbody>
+    </table>
+</div>
+    
+{% endblock body %}

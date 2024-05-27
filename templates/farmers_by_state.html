@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Select Farmers by State
+{% endblock title %}
+
+{% block body %}
+    <h3 class="text-center"><span>Select Farmers by State</span></h3>
+
+    {% with messages=get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+
+                <form method="post">
+                    <div class="form-group">
+                        <label for="state">Enter State</label>
+                        <input type="text" class="form-control" id="state" name="state" required>
+                    </div>
+                    <br>
+
+                    <button type="submit" class="btn btn-success btn-block">Submit</button>
+                </form>
+                <br>
+                <br>
+
+            </div>
+
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+    
+    <br>
+    
+    <div class="container mt-3">
+        {% if farmers %}
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Farmer ID</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for farmer in farmers %}
+                        <tr>
+                            <th scope="row">{{ farmer.farmer_id }}</th>
+                            <td>{{ farmer.fname }}</td>
+                            <td>{{ farmer.lname }}</td>
+                            <td>{{ farmer.state }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+
+{% endblock body %}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Add AgroProducts</title>
+  <style>
+    /* Add any additional styles specific to this page */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: lightgreen; /* Set background color to light green */
+    }
+    
+    .container {
+      text-align: center;
+      color: rgb(0, 0, 0);
+      font-size: 20px; /* Increase font size of form */
+    }
+  </style>
+  <!-- Include any additional CSS or meta tags specific to this page -->
+</head>
+
+<body>
+  <div class="container">
+    <h3><span>Add Agro Products</span></h3>
+
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+          {{message}}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <form action="/addagroproducts/{{ farmer.farmer_id }}" method="post">
+      <div class="form-group">
+        <label for="username">Farmer Name</label>
+        <input type="text" class="form-control" name="username" value="{{ current_user.username }}" id="{{ current_user.username }}" required>
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="email">Farmer Email</label>
+        <input type="email" class="form-control" name="email" value="{{ current_user.email }}" id="{{ current_user.email }}" required>
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="productname">Product Name</label>
+        <input type="text" class="form-control" name="productname" id="productname" required>
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="productdesc">Product Description</label>
+        <textarea class="form-control" name="productdesc" id="productdesc" required></textarea>
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" class="form-control" name="price" id="price" required>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-success btn-block">Add Product</button>
+    </form>
+  </div>
+  <!-- Include any additional scripts or content specific to this page -->
+</body>
+</html>

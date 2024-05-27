@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %}
+Add Farm Animals
+{% endblock title %}
+
+{% block body %}
+ <h3 class="text-center"><span>Add Farm Animals</span> </h3>
+  
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+    {{message}}
+</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form action="/farmanimals" method="post">
+                <!-- Add form fields for farm animal details -->
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="breed">Breed</label>
+                    <input type="text" class="form-control" name="breed" id="breed" required>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select class="form-control" name="gender" id="gender" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age (years)</label>
+                    <input type="number" class="form-control" name="age" id="age" required>
+                </div>
+                <div class="form-group">
+                    <label for="health_status">Health Status</label>
+                    <input type="text" class="form-control" name="health_status" id="health_status" required>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="farmer_id">Farmer ID</label>
+                    <input type="number" class="form-control" name="farmer_id" id="farmer_id" required>
+                </div> -->
+                <br>
+                <button type="submit" class="btn btn-success btn-block">Add Farm Animal</button>
+            </form>
+            <br>
+            <br>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Animal ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Breed</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Age</th>
+          <th scope="col">Health Status</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for post in query %}
+        <tr>
+          <th scope="row">{{post.id}}</th>
+          <td>{{post.name}}</td>
+          <td>{{post.breed}}</td>
+          <td>{{post.gender}}</td>
+          <td>{{post.age}}</td>
+          <td>{{post.health_status}}</td>
+
+        </tr>
+    {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock body %}
